@@ -1,4 +1,3 @@
-/* Premium Global variables */
 :root {
   --bg-dark: #0f172a;
   --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
@@ -12,6 +11,58 @@
   --glass-bg: rgba(255, 255, 255, 0.03);
   --glass-border: rgba(255, 255, 255, 0.08);
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --nav-bg: rgba(15, 23, 42, 0.6);
+  --nav-scrolled-bg: rgba(15, 23, 42, 0.8);
+  --mobile-nav-bg: rgba(15, 23, 42, 0.98);
+  --nav-border: rgba(255, 255, 255, 0.1);
+  --input-bg: rgba(0, 0, 0, 0.2);
+  --tag-bg: rgba(255, 255, 255, 0.05);
+  --close-btn-bg: rgba(255, 255, 255, 1);
+  --close-btn-color: #0f172a;
+}
+
+[data-theme="dark"] {
+  --bg-dark: #0a0a0a;
+  --bg-gradient: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  --primary: #9f7aea;
+  --primary-rgb: 159, 122, 234;
+  --primary-glow: rgba(159, 122, 234, 0.3);
+  --secondary: #63b3ed;
+  --secondary-rgb: 99, 179, 237;
+  --text-main: #f1f5f9;
+  --text-muted: #a0aec0;
+  --glass-bg: rgba(255, 255, 255, 0.02);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --nav-bg: rgba(0, 0, 0, 0.6);
+  --nav-scrolled-bg: rgba(0, 0, 0, 0.8);
+  --mobile-nav-bg: rgba(0, 0, 0, 0.98);
+  --nav-border: rgba(255, 255, 255, 0.05);
+  --input-bg: rgba(255, 255, 255, 0.05);
+  --tag-bg: rgba(255, 255, 255, 0.03);
+  --close-btn-bg: rgba(255, 255, 255, 1);
+  --close-btn-color: #000000;
+}
+
+[data-theme="light"] {
+  --bg-dark: #f8fafc;
+  --bg-gradient: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  --primary: #7c3aed;
+  --primary-rgb: 124, 58, 237;
+  --primary-glow: rgba(124, 58, 237, 0.3);
+  --secondary: #2563eb;
+  --secondary-rgb: 37, 99, 235;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(0, 0, 0, 0.1);
+  --nav-bg: rgba(255, 255, 255, 0.6);
+  --nav-scrolled-bg: rgba(255, 255, 255, 0.8);
+  --mobile-nav-bg: rgba(248, 250, 252, 0.98);
+  --nav-border: rgba(0, 0, 0, 0.1);
+  --input-bg: rgba(255, 255, 255, 0.9);
+  --tag-bg: rgba(0, 0, 0, 0.05);
+  --close-btn-bg: #0f172a;
+  --close-btn-color: #ffffff;
 }
 
 * {
@@ -604,7 +655,7 @@ section {
 .tech-tag {
   font-size: 0.8rem;
   padding: 0.3rem 0.8rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--tag-bg);
   border-radius: 20px;
   color: var(--primary);
 }
@@ -701,7 +752,7 @@ section {
   width: 100%;
   padding: 1rem;
   border-radius: 8px;
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--input-bg);
   border: 1px solid var(--glass-border);
   color: var(--text-main);
   font-family: inherit;
