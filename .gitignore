@@ -4,6 +4,6 @@ dist
 .vscode/*
 .example.env
 .env.example
-frontend/
+
 
 .env
