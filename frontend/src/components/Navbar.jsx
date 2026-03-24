@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import '../styles/global.css';
+import ThemeSwitcher from './ThemeSwitcher';
 
 const Navbar = ({ socialLinks }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,10 +35,14 @@ const Navbar = ({ socialLinks }) => {
           <li><a href="/admin" className="admin-btn">Admin</a></li>
         </ul>
 
-        {/* Mobile Toggle */}
-        <button className="mobile-menu-toggle" onClick={toggleMenu} aria-label="Toggle menu">
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
+        {/* Action Controls */}
+        <div className="nav-actions">
+          <ThemeSwitcher />
+          {/* Mobile Toggle */}
+          <button className="mobile-menu-toggle" onClick={toggleMenu} aria-label="Toggle menu">
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Links */}
@@ -79,14 +84,14 @@ const Navbar = ({ socialLinks }) => {
           justify-content: space-between;
           padding: 0.75rem 2rem;
           border-radius: 50px !important;
-          background: rgba(15, 23, 42, 0.6) !important;
-          border: 1px solid rgba(255, 255, 255, 0.1) !important;
+          background: var(--nav-bg) !important;
+          border: 1px solid var(--nav-border) !important;
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
           transition: all 0.4s ease;
         }
 
         .navbar-container.scrolled .navbar-capsule {
-          background: rgba(15, 23, 42, 0.8) !important;
+          background: var(--nav-scrolled-bg) !important;
           backdrop-filter: blur(15px);
           box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
         }
@@ -123,6 +128,12 @@ const Navbar = ({ socialLinks }) => {
           font-weight: 600 !important;
         }
 
+        .nav-actions {
+          display: flex;
+          align-items: center;
+          gap: 1.5rem;
+        }
+
         .mobile-menu-toggle {
           display: none;
           background: none;
@@ -137,7 +148,7 @@ const Navbar = ({ socialLinks }) => {
           right: -100%;
           width: 100%;
           height: 100vh;
-          background: rgba(15, 23, 42, 0.98);
+          background: var(--mobile-nav-bg);
           backdrop-filter: blur(20px);
           display: flex;
           align-items: center;
@@ -156,7 +167,7 @@ const Navbar = ({ socialLinks }) => {
           right: 2rem;
           background: none;
           border: none;
-          color: white;
+          color: var(--text-main);
           cursor: pointer;
         }
 
@@ -169,7 +180,7 @@ const Navbar = ({ socialLinks }) => {
         }
 
         .mobile-links a {
-          color: white;
+          color: var(--text-main);
           font-size: 2rem;
           font-weight: 700;
           transition: transform 0.3s ease;
