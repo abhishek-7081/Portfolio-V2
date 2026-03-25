@@ -2,8 +2,5 @@ node_modules
 dist
 *.local
 .vscode/*
-.example.env
 .env.example
-
-
 .env
