@@ -1,0 +1,28 @@
+﻿[dotenv@17.3.1] injecting env (4) from .env -- tip: ≡ƒñû agentic secret storage: https://dotenvx.com/as2
+Connected to MongoDB
+node : Error seeding database: TypeError: 
+next is not a function
+At line:1 char:1
++ node seed-mongo.js > out.txt 2>&1
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ( 
+   Error seeding d... not a function:String)  
+   [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandEr 
+   ror
+ 
+    at model.<anonymous> (file:///C:/Users/HP%
+20Victus/Desktop/Port3/backend/models.js:40:3)
+    at async Kareem.execPre (C:\Users\HP Victu
+s\Desktop\Port3\backend\node_modules\kareem\in
+dex.js:70:24)
+    at async model.$__save (C:\Users\HP Victus
+\Desktop\Port3\backend\node_modules\mongoose\l
+ib\model.js:397:5)
+    at async model.save (C:\Users\HP Victus\De
+sktop\Port3\backend\node_modules\mongoose\lib\
+model.js:667:5)
+    at async seedDatabase (file:///C:/Users/HP
+%20Victus/Desktop/Port3/backend/seed-mongo.js:
+18:7)
+Disconnected from MongoDB
