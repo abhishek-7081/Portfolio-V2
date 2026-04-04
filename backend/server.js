@@ -47,7 +47,7 @@ const upload = multer({ storage: storage });
 // const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 // For MongoDB
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/portfolio';
+const MONGODB_URI = process.env.MONGODB_URI;
 mongoose.connect(MONGODB_URI).then(() => console.log('Connected to MongoDB')).catch(console.error);
 
 // Basic health check route

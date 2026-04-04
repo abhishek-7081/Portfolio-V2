@@ -4,7 +4,7 @@ import { Admin, PortfolioInfo } from './models.js';
 
 dotenv.config();
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/portfolio';
+const MONGODB_URI = process.env.MONGODB_URI;
 
 const seedDatabase = async () => {
   try {
