@@ -3,6 +3,7 @@ import { api } from '../api/portfolioApi';
 import { useAuth } from '../context/AuthContext';
 import { Save } from 'lucide-react';
 import ImageUploader from './ImageUploader';
+import Loader from './Loader';
 
 const AdminSettings = () => {
   const [loading, setLoading] = useState(true);
@@ -74,7 +75,7 @@ const AdminSettings = () => {
     }
   };
 
-  if (loading) return <div>Loading settings...</div>;
+  if (loading) return <Loader fullScreen={true} />;
 
   return (
     <div className="admin-settings glass-card" style={{ padding: '2rem', maxWidth: '800px' }}>
@@ -105,7 +106,7 @@ const AdminSettings = () => {
           />
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginTop: '1rem' }}>
+        <div className="settings-grid" style={{ marginTop: '1rem' }}>
           <div className="form-group">
             <ImageUploader 
                initialImage={formData.profile_image_url} 
@@ -125,7 +126,7 @@ const AdminSettings = () => {
         </div>
 
         <h3 style={{ margin: '2rem 0 1rem' }}>Social Links</h3>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+        <div className="settings-grid">
           <div className="form-group">
             <label>GitHub</label>
             <input 

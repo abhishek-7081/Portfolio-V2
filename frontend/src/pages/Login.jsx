@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import Loader from '../components/Loader';
 import '../styles/global.css';
 
 const Login = () => {
@@ -29,6 +30,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      {loading && <Loader fullScreen={true} />}
       <div className="glass-card login-card">
         <h2 className="section-title" style={{ marginBottom: '1.5rem', fontSize: '2rem' }}>Admin Login</h2>
         <p className="contact-subtitle" style={{ marginBottom: '2rem' }}>Secure access to portfolio dashboard.</p>
@@ -38,8 +40,8 @@ const Login = () => {
         <form onSubmit={handleLogin} className="contact-form" style={{ width: '100%' }}>
           <div className="form-group">
             <input 
-              type="email" 
-              placeholder="Admin Email" 
+              type="text" 
+              placeholder="Admin ID (e.g. 1234)" 
               required 
               className="form-input" 
               value={email}

@@ -7,6 +7,7 @@ import Projects from '../components/Projects';
 import Certificates from '../components/Certificates';
 import Contact from '../components/Contact';
 import { api } from '../api/portfolioApi';
+import Loader from '../components/Loader';
 import '../styles/global.css';
 
 const Home = () => {
@@ -36,11 +37,7 @@ const Home = () => {
   }, []);
 
   if (loading) {
-    return (
-      <div style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'var(--bg-dark)', color: 'var(--text-main)' }}>
-        <div className="loader">Loading Portfolio...</div>
-      </div>
-    );
+    return <Loader fullScreen={true} />;
   }
 
   return (

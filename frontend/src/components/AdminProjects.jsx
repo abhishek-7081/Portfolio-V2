@@ -3,9 +3,11 @@ import { api } from '../api/portfolioApi';
 import { useAuth } from '../context/AuthContext';
 import { Edit2, Plus, Trash2, ExternalLink, Github } from 'lucide-react';
 import ImageUploader from './ImageUploader';
+import Loader from './Loader';
 
 const AdminProjects = () => {
   const [projects, setProjects] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingProject, setEditingProject] = useState(null);
   const [formData, setFormData] = useState({
@@ -23,8 +25,10 @@ const AdminProjects = () => {
   }, []);
 
   const fetchProjects = async () => {
+    setIsLoading(true);
     const data = await api.getProjects();
     setProjects(data);
+    setIsLoading(false);
   };
 
   const handleInputChange = (e) => {
@@ -39,6 +43,7 @@ const AdminProjects = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     if (editingProject) {
       await api.updateProject(editingProject.id, formData, session.access_token);
     } else {
@@ -72,6 +77,7 @@ const AdminProjects = () => {
 
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this project?')) {
+      setIsLoading(true);
       await api.deleteProject(id, session.access_token);
       fetchProjects();
     }
@@ -86,11 +92,11 @@ const AdminProjects = () => {
         </button>
       </div>
 
-      <div className="projects-list" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
-        {projects.map(project => (
+      <div className="projects-list admin-grid">
+        {isLoading && projects.length === 0 ? <Loader fullScreen={true} /> : projects.map(project => (
           <div key={project.id} className="glass-card project-admin-card" style={{ padding: '1.5rem' }}>
             {project.image_url && (
-              <img src={project.image_url} alt={project.title} style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '8px', marginBottom: '1rem' }} />
+              <img src={project.image_url} alt={project.title} loading="lazy" style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '8px', marginBottom: '1rem' }} />
             )}
             <h3>{project.title}</h3>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', margin: '0.5rem 0' }}>{project.description?.substring(0, 100)}...</p>

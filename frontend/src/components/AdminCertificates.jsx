@@ -3,9 +3,11 @@ import { api } from '../api/portfolioApi';
 import { useAuth } from '../context/AuthContext';
 import { Edit2, Plus, Trash2 } from 'lucide-react';
 import ImageUploader from './ImageUploader';
+import Loader from './Loader';
 
 const AdminCertificates = () => {
   const [certificates, setCertificates] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingCert, setEditingCert] = useState(null);
   const [formData, setFormData] = useState({
@@ -21,8 +23,10 @@ const AdminCertificates = () => {
   }, []);
 
   const fetchCertificates = async () => {
+    setIsLoading(true);
     const data = await api.getCertificates();
     setCertificates(data);
+    setIsLoading(false);
   };
 
   const handleInputChange = (e) => {
@@ -32,6 +36,7 @@ const AdminCertificates = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     if (editingCert) {
       await api.updateCertificate(editingCert.id, formData, session.access_token);
     } else {
@@ -56,6 +61,7 @@ const AdminCertificates = () => {
 
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this certificate?')) {
+      setIsLoading(true);
       await api.deleteCertificate(id, session.access_token);
       fetchCertificates();
     }
@@ -70,11 +76,11 @@ const AdminCertificates = () => {
         </button>
       </div>
 
-      <div className="certificates-list" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
-        {certificates.map(cert => (
+      <div className="certificates-list admin-grid">
+        {isLoading && certificates.length === 0 ? <Loader fullScreen={true} /> : certificates.map(cert => (
           <div key={cert.id} className="glass-card certificate-admin-card" style={{ padding: '1.5rem' }}>
             {cert.image_url && (
-              <img src={cert.image_url} alt={cert.title} style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '8px', marginBottom: '1rem' }} />
+              <img src={cert.image_url} alt={cert.title} loading="lazy" style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '8px', marginBottom: '1rem' }} />
             )}
             <h3>{cert.title}</h3>
             <p style={{ color: 'var(--primary)', fontWeight: '600' }}>{cert.organization}</p>
