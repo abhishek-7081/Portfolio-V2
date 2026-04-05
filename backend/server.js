@@ -10,11 +10,17 @@ import { Admin, Project, Certificate, PortfolioInfo } from './models.js';
 
 import multer from 'multer';
 import path from 'path';
-import fs from 'fs';
 import { fileURLToPath } from 'url';
+import { v2 as cloudinary } from 'cloudinary';
+import { CloudinaryStorage } from 'multer-storage-cloudinary';
 
 dotenv.config();
 
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -25,18 +31,13 @@ const __dirname = path.dirname(__filename);
 // Serve uploads directory
 app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
-// Set up Mutler for disk storage (For MongoDB)
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    const uploadPath = path.join(__dirname, 'public/uploads');
-    if (!fs.existsSync(uploadPath)) {
-      fs.mkdirSync(uploadPath, { recursive: true });
-    }
-    cb(null, uploadPath);
+// Set up Multer with CloudinaryStorage
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'portfolio_uploads',
+    allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
   },
-  filename: function (req, file, cb) {
-    cb(null, `${Date.now()}-${file.originalname}`);
-  }
 });
 const upload = multer({ storage: storage });
 
@@ -106,27 +107,15 @@ const clearCache = (key) => { cache[key] = null; };
 
 // --- Upload API ---
 app.post('/api/upload', verifyAdmin, upload.single('image'), async (req, res) => {
-  if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
+  try {
+    if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
 
-  // For Supabase
-  /*
-  const fileName = `${Date.now()}-${req.file.originalname}`;
-  const { data, error } = await supabase.storage
-    .from('portfolio')
-    .upload(fileName, req.file.buffer, {
-      contentType: req.file.mimetype,
-      upsert: true
-    });
-  if (error) return res.status(500).json({ error: error.message });
-  const { data: { publicUrl } } = supabase.storage
-    .from('portfolio')
-    .getPublicUrl(fileName);
-  res.json({ url: publicUrl });
-  */
-
-  // For MongoDB / Local Storage
-  const publicUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
-  res.json({ url: publicUrl });
+    // With CloudinaryStorage, req.file.path contains the uploaded file URL
+    const publicUrl = req.file.path;
+    res.json({ url: publicUrl });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 // --- Projects API ---
