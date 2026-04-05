@@ -106,7 +106,16 @@ const cache = {
 const clearCache = (key) => { cache[key] = null; };
 
 // --- Upload API ---
-app.post('/api/upload', verifyAdmin, upload.single('image'), async (req, res) => {
+app.post('/api/upload', verifyAdmin, (req, res, next) => {
+  upload.single('image')(req, res, (err) => {
+    if (err) {
+      console.error('Upload Error:', err);
+      // Catch Cloudinary or Multer errors and return as JSON
+      return res.status(500).json({ error: err.message || 'Error occurred during image upload' });
+    }
+    next();
+  });
+}, async (req, res) => {
   try {
     if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
 
@@ -114,6 +123,7 @@ app.post('/api/upload', verifyAdmin, upload.single('image'), async (req, res) =>
     const publicUrl = req.file.path;
     res.json({ url: publicUrl });
   } catch (error) {
+    console.error('Server Error:', error);
     res.status(500).json({ error: error.message });
   }
 });
