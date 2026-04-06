@@ -28,18 +28,18 @@ const Certificates = ({ certificates }) => {
         <h2 className="section-title">Certifications & Achievements</h2>
         <div className="certificates-grid">
           {certificates?.map((cert) => (
-            <div 
-              key={cert.id} 
-              className="certificate-card glass-card hover-glow" 
+            <div
+              key={cert.id}
+              className="certificate-card glass-card hover-glow"
               onClick={(e) => openModal(e, cert)}
               style={{ cursor: 'pointer', overflow: 'hidden' }}
             >
               <div className="certificate-image-wrapper" style={{ position: 'relative' }}>
-                <img 
-                  src={cert.image_url || 'https://via.placeholder.com/400x300'} 
-                  alt={cert.title} 
-                  className="certificate-image" 
-                  loading="lazy" 
+                <img
+                  src={cert.image_url || 'https://via.placeholder.com/400x300'}
+                  alt={cert.title}
+                  className="certificate-image"
+                  loading="lazy"
                   style={{ width: '100%', height: '200px', objectFit: 'cover' }}
                 />
                 <div className="certificate-overlay">
@@ -69,23 +69,23 @@ const Certificates = ({ certificates }) => {
             <button className="modal-close-btn" onClick={closeModal} aria-label="Close modal">
               <X size={24} />
             </button>
-            
+
             <div className="modal-layout">
               <div className="modal-image-side">
-                <img 
-                  src={selectedCert.image_url || 'https://via.placeholder.com/1200x800'} 
-                  alt={selectedCert.title} 
+                <img
+                  src={selectedCert.image_url || 'https://via.placeholder.com/1200x800'}
+                  alt={selectedCert.title}
                   className="modal-full-img"
                 />
               </div>
-              
+
               <div className="modal-info-side">
                 <div className="modal-badge-custom">
                   <Award size={20} />
                   <span>Professional Certification</span>
                 </div>
                 <h2 className="modal-title">{selectedCert.title}</h2>
-                
+
                 <div className="modal-description-container">
                   <div className="cert-detail-item">
                     <span className="label">Issuing Organization</span>

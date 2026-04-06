@@ -108,11 +108,11 @@ const Contact = ({ info }) => {
                 <div className="form-row">
                   <div className="form-group">
                     <label>Full Name</label>
-                    <input type="text" name="name" className="form-input" placeholder="John Doe" required />
+                    <input type="text" name="name" className="form-input" placeholder="Abhi" required />
                   </div>
                   <div className="form-group">
                     <label>Email Address</label>
-                    <input type="email" name="email" className="form-input" placeholder="john@example.com" required />
+                    <input type="email" name="email" className="form-input" placeholder="abhi@gmail.com" required />
                   </div>
                 </div>
                 

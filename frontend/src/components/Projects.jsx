@@ -101,12 +101,12 @@ const Projects = ({ projects }) => {
                 <div className="modal-links">
                   {selectedProject.github_url && (
                     <a href={selectedProject.github_url} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                      <Github size={18} /> View Source Code
+                      <Github size={18} />Source Code
                     </a>
                   )}
                   {selectedProject.live_url && (
                     <a href={selectedProject.live_url} target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ border: 'none', background: 'rgba(255,255,255,0.05)' }}>
-                      <ExternalLink size={18} /> Live Demonstration
+                      <ExternalLink size={18} /> Live
                     </a>
                   )}
                 </div>
