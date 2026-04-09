@@ -13,7 +13,7 @@ const Contact = ({ info }) => {
     
     const formData = new FormData(event.target);
     // User needs to update this access key for their own Web3Forms account
-    formData.append("access_key", "YOUR_ACCESS_KEY_HERE");
+    formData.append("access_key", "38a79457-2127-4717-9fec-439c100d61e4");
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -53,7 +53,7 @@ const Contact = ({ info }) => {
               </div>
               <div>
                 <h4>Email Me</h4>
-                <p>{info?.email || 'abhishek@example.com'}</p>
+                <p>{info?.email || 'at.abhishektripathi12@gmail.com'}</p>
               </div>
             </div>
 
@@ -63,7 +63,7 @@ const Contact = ({ info }) => {
               </div>
               <div>
                 <h4>Location</h4>
-                <p>{info?.location || 'New Delhi, India'}</p>
+                <p>{info?.location || 'Greater Noida, India'}</p>
               </div>
             </div>
 
