@@ -82,7 +82,7 @@ const Certificates = ({ certificates }) => {
               <div className="modal-info-side">
                 <div className="modal-badge-custom">
                   <Award size={20} />
-                  <span>Professional Certification</span>
+                  <span>Certificates</span>
                 </div>
                 <h2 className="modal-title">{selectedCert.title}</h2>
 

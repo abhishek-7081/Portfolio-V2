@@ -80,7 +80,7 @@ const Projects = ({ projects }) => {
               
               <div className="modal-info-side">
                 <div className="modal-badge-custom">
-                  <span>Featured Development Project</span>
+                  <span>Project</span>
                 </div>
                 <h2 className="modal-title">{selectedProject.title}</h2>
                 
@@ -101,12 +101,12 @@ const Projects = ({ projects }) => {
                 <div className="modal-links">
                   {selectedProject.github_url && (
                     <a href={selectedProject.github_url} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                      <Github size={18} />Source Code
-                    </a>
+                      <Github size={16} /> Source Code
+                      </a>
                   )}
                   {selectedProject.live_url && (
                     <a href={selectedProject.live_url} target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ border: 'none', background: 'rgba(255,255,255,0.05)' }}>
-                      <ExternalLink size={18} /> Live
+                      <ExternalLink size={16} /> Live
                     </a>
                   )}
                 </div>
