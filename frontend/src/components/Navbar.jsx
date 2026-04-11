@@ -146,16 +146,17 @@ const Navbar = ({ socialLinks }) => {
           position: fixed;
           top: 0;
           right: -100%;
-          width: 100%;
-          height: 100vh;
-          background: var(--mobile-nav-bg);
+          width: 75%;
+          height: 75vh;
+          background: transparent opacity(0.8);
+          // background: var(--mobile-nav-bg);
           backdrop-filter: blur(20px);
           display: flex;
           align-items: center;
           justify-content: center;
           transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
           z-index: 2000;
-        }
+          border-radius: 50px 50px 50px 50px;    }
 
         .mobile-nav.open {
           right: 0;
