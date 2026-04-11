@@ -105,6 +105,55 @@ const cache = {
 };
 const clearCache = (key) => { cache[key] = null; };
 
+
+
+const defaultPortfolioInfo = {
+  about_text: 'Welcome to my portfolio.',
+  hero_roles: ['MERN Stack Developer', 'Full-Stack Engineer', 'Problem Solver'],
+  skills: [],
+  social_links: {
+    github: '',
+    linkedin: '',
+    twitter: '',
+    instagram: ''
+  },
+  resume_url: '',
+  profile_image_url: '',
+  email: '',
+  location: '',
+  years_experience: 0,
+  projects_completed: 0
+};
+
+const normalizeStringArray = (value, fallback = []) => {
+  if (!Array.isArray(value)) return fallback;
+  const cleaned = value.map((item) => `${item ?? ''}`.trim()).filter(Boolean);
+  return cleaned.length > 0 ? cleaned : fallback;
+};
+
+const normalizeCount = (value) => {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) && parsed >= 0 ? parsed : 0;
+};
+
+const normalizePortfolioInfo = (info = {}) => ({
+  ...defaultPortfolioInfo,
+  ...info,
+  about_text: `${info?.about_text ?? defaultPortfolioInfo.about_text}`.trim() || defaultPortfolioInfo.about_text,
+  hero_roles: normalizeStringArray(info?.hero_roles, defaultPortfolioInfo.hero_roles),
+  skills: normalizeStringArray(info?.skills, defaultPortfolioInfo.skills),
+  social_links: {
+    ...defaultPortfolioInfo.social_links,
+    ...(info?.social_links ?? {})
+  },
+  resume_url: `${info?.resume_url ?? ''}`.trim(),
+  profile_image_url: `${info?.profile_image_url ?? ''}`.trim(),
+  email: `${info?.email ?? ''}`.trim(),
+  location: `${info?.location ?? ''}`.trim(),
+  years_experience: normalizeCount(info?.years_experience),
+  projects_completed: normalizeCount(info?.projects_completed)
+});
+
 // --- Upload API ---
 app.post('/api/upload', verifyAdmin, (req, res, next) => {
   upload.single('image')(req, res, (err) => {
@@ -297,9 +346,12 @@ app.get('/api/portfolio-info', async (req, res) => {
     if (cache.portfolioInfo) return res.json(cache.portfolioInfo);
     let info = await PortfolioInfo.findOne().lean();
     if (!info) {
-      info = { about_text: '', skills: [], social_links: {} };
+      info = normalizePortfolioInfo();
     } else {
-      info.id = info._id.toString();
+      info = {
+        ...normalizePortfolioInfo(info),
+        id: info._id.toString()
+      };
     }
     cache.portfolioInfo = info;
     res.json(info);
@@ -319,15 +371,26 @@ app.put('/api/portfolio-info', verifyAdmin, async (req, res) => {
   // For MongoDB
   try {
     const info = await PortfolioInfo.findOne();
+    const currentInfo = info?.toObject?.() ?? {};
+    const payload = normalizePortfolioInfo({
+      ...currentInfo,
+      ...req.body,
+      social_links: {
+        ...(currentInfo.social_links ?? {}),
+        ...(req.body.social_links ?? {})
+      }
+    });
+    payload.updated_at = new Date();
+
     let updated;
     if (info) {
-      updated = await PortfolioInfo.findByIdAndUpdate(info._id, req.body, { new: true });
+      updated = await PortfolioInfo.findByIdAndUpdate(info._id, payload, { new: true });
     } else {
-      updated = new PortfolioInfo(req.body);
+      updated = new PortfolioInfo(payload);
       await updated.save();
     }
     clearCache('portfolioInfo');
-    res.json({ ...updated.toObject(), id: updated._id.toString() });
+    res.json({ ...normalizePortfolioInfo(updated.toObject()), id: updated._id.toString() });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

@@ -24,7 +24,20 @@ const seedDatabase = async () => {
     // Seed Portfolio Info
     const infoExists = await PortfolioInfo.findOne();
     if (!infoExists) {
-      const newInfo = new PortfolioInfo({ about_text: 'Welcome to my portfolio.' });
+      const newInfo = new PortfolioInfo({
+        about_text: 'Welcome to my portfolio.',
+        hero_roles: ['MERN Stack Developer', 'Full-Stack Engineer', 'Problem Solver'],
+        email: 'abhi1golu@gmail.com',
+        location: 'Greater Noida, India',
+        years_experience: 2,
+        projects_completed: 20,
+        social_links: {
+          github: '',
+          linkedin: '',
+          twitter: '',
+          instagram: ''
+        }
+      });
       await newInfo.save();
       console.log('Default portfolio info created.');
     } else {

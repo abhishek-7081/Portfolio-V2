@@ -32,7 +32,7 @@ const Navbar = ({ socialLinks }) => {
           <li><a href="#projects">Projects</a></li>
           <li><a href="#certificates">Certificates</a></li>
           <li><a href="#contact">Contact</a></li>
-          {/* <li><a href="/admin" className="admin-btn">Admin</a></li> */}
+          <li><a href="/admin" className="admin-btn">Admin</a></li>
         </ul>
 
         {/* Action Controls */}

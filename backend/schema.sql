@@ -24,10 +24,15 @@ CREATE TABLE IF NOT EXISTS certificates (
 CREATE TABLE IF NOT EXISTS portfolio_info (
   id int PRIMARY KEY CHECK (id = 1),
   about_text text,
+  hero_roles jsonb DEFAULT '[]',
   skills jsonb DEFAULT '[]',
   social_links jsonb DEFAULT '{}',
   resume_url text,
   profile_image_url text,
+  email text,
+  location text,
+  years_experience integer DEFAULT 0,
+  projects_completed integer DEFAULT 0,
   updated_at timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 

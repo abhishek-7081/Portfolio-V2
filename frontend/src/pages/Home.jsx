@@ -8,6 +8,7 @@ import Certificates from '../components/Certificates';
 import Contact from '../components/Contact';
 import { api } from '../api/portfolioApi';
 import Loader from '../components/Loader';
+import { normalizePortfolioInfo } from '../lib/portfolioInfo';
 import '../styles/global.css';
 
 const Home = () => {
@@ -26,7 +27,7 @@ const Home = () => {
           api.getCertificates(),
           api.getPortfolioInfo()
         ]);
-        setPortfolioData({ projects, certificates, info });
+        setPortfolioData({ projects, certificates, info: normalizePortfolioInfo(info) });
       } catch (error) {
         console.error('Error fetching portfolio data:', error);
       } finally {
@@ -45,7 +46,13 @@ const Home = () => {
       <Navbar socialLinks={portfolioData.info?.social_links} />
       <main>
         <Hero info={portfolioData.info} />
-        <AboutMe aboutText={portfolioData.info?.about_text} resumeUrl={portfolioData.info?.resume_url} />
+        <AboutMe
+          aboutText={portfolioData.info?.about_text}
+          resumeUrl={portfolioData.info?.resume_url}
+          profileImageUrl={portfolioData.info?.profile_image_url}
+          yearsExperience={portfolioData.info?.years_experience}
+          projectsCompleted={portfolioData.info?.projects_completed}
+        />
         <Skills skills={portfolioData.info?.skills} />
         <Projects projects={portfolioData.projects} />
         <Certificates certificates={portfolioData.certificates} />

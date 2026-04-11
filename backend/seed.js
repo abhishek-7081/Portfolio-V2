@@ -20,13 +20,19 @@ const seedData = async () => {
   const { error: infoError } = await supabase.from('portfolio_info').upsert({
     id: 1,
     about_text: 'I am a passionate software developer specializing in the MERN stack. I love building full-stack applications that are scalable, maintainable, and user-friendly. With a strong foundation in modern web technologies, I strive to create impactful digital experiences.',
+    hero_roles: ['MERN Stack Developer', 'Full-Stack Engineer', 'Problem Solver'],
     skills: ['React', 'Node.js', 'Express', 'MongoDB', 'Supabase', 'JavaScript', 'Tailwind CSS', 'Redux', 'Git'],
     social_links: {
       github: 'https://github.com/abhishektripathi',
       linkedin: 'https://linkedin.com/in/abhishektripathi',
-      twitter: 'https://twitter.com/abhishek_dev'
+      twitter: 'https://twitter.com/abhishek_dev',
+      instagram: 'https://instagram.com/abhishek_dev'
     },
-    resume_url: 'https://example.com/resume.pdf'
+    resume_url: 'https://example.com/resume.pdf',
+    email: 'abhi1golu@gmail.com',
+    location: 'Greater Noida, India',
+    years_experience: 2,
+    projects_completed: 20
   });
   if (infoError) console.error('Error seeding portfolio_info:', infoError.message);
 

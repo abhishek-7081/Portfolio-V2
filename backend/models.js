@@ -21,10 +21,23 @@ const certificateSchema = new mongoose.Schema({
 
 const portfolioInfoSchema = new mongoose.Schema({
   about_text: { type: String, default: 'Welcome to my portfolio.' },
-  skills: { type: [mongoose.Schema.Types.Mixed], default: [] },
-  social_links: { type: mongoose.Schema.Types.Mixed, default: {} },
-  resume_url: { type: String },
-  profile_image_url: { type: String },
+  hero_roles: {
+    type: [String],
+    default: ['MERN Stack Developer', 'Full-Stack Engineer', 'Problem Solver']
+  },
+  skills: { type: [String], default: [] },
+  social_links: {
+    github: { type: String, default: '' },
+    linkedin: { type: String, default: '' },
+    twitter: { type: String, default: '' },
+    instagram: { type: String, default: '' }
+  },
+  resume_url: { type: String, default: '' },
+  profile_image_url: { type: String, default: '' },
+  email: { type: String, default: '' },
+  location: { type: String, default: '' },
+  years_experience: { type: Number, default: 0 },
+  projects_completed: { type: Number, default: 0 },
   updated_at: { type: Date, default: Date.now }
 });
 

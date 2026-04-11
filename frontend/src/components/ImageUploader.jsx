@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { api } from '../api/portfolioApi';
 import { useAuth } from '../context/AuthContext';
 import { Upload, X } from 'lucide-react';
@@ -8,6 +8,10 @@ const ImageUploader = ({ onUploadSuccess, initialImage }) => {
   const [uploading, setUploading] = useState(false);
   const [preview, setPreview] = useState(initialImage || null);
   const { session } = useAuth();
+
+  useEffect(() => {
+    setPreview(initialImage || null);
+  }, [initialImage]);
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
