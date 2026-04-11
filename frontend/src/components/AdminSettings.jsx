@@ -75,7 +75,7 @@ const AdminSettings = () => {
     }
   };
 
-  if (loading) return <Loader fullScreen={true} />;
+  if (loading) return <Loader variant="admin-settings" />;
 
   return (
     <div className="admin-settings glass-card" style={{ padding: '2rem', maxWidth: '800px' }}>

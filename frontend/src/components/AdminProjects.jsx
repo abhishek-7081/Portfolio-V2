@@ -87,29 +87,33 @@ const AdminProjects = () => {
     <div className="admin-projects">
       <div className="action-bar" style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between' }}>
         <h2>Manage Projects</h2>
-        <button className="btn btn-primary" onClick={() => { setIsModalOpen(true); setEditingProject(null); }}>
+        <button className="btn btn-primary" onClick={() => { setIsModalOpen(true); setEditingProject(null); }} disabled={isLoading}>
           <Plus size={18} /> Add Project
         </button>
       </div>
 
-      <div className="projects-list admin-grid">
-        {isLoading && projects.length === 0 ? <Loader fullScreen={true} /> : projects.map(project => (
-          <div key={project.id} className="glass-card project-admin-card" style={{ padding: '1.5rem' }}>
-            {project.image_url && (
-              <img src={project.image_url} alt={project.title} loading="lazy" style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '8px', marginBottom: '1rem' }} />
-            )}
-            <h3>{project.title}</h3>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', margin: '0.5rem 0' }}>{project.description?.substring(0, 100)}...</p>
-            <div className="card-actions" style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem' }}>
-              <button className="btn btn-outline btn-sm" onClick={() => handleEdit(project)}>
-                <Edit2 size={16} /> Edit
-              </button>
-              <button className="btn btn-outline btn-sm" style={{ color: '#ef4444' }} onClick={() => handleDelete(project.id)}>
-                <Trash2 size={16} /> Delete
-              </button>
-            </div>
+      <div className="projects-list">
+        {isLoading ? <Loader variant="admin-projects-grid" /> : (
+          <div className="admin-grid">
+            {projects.map(project => (
+              <div key={project.id} className="glass-card project-admin-card" style={{ padding: '1.5rem' }}>
+                {project.image_url && (
+                  <img src={project.image_url} alt={project.title} loading="lazy" style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '8px', marginBottom: '1rem' }} />
+                )}
+                <h3>{project.title}</h3>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', margin: '0.5rem 0' }}>{project.description?.substring(0, 100)}...</p>
+                <div className="card-actions" style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem' }}>
+                  <button className="btn btn-outline btn-sm" onClick={() => handleEdit(project)}>
+                    <Edit2 size={16} /> Edit
+                  </button>
+                  <button className="btn btn-outline btn-sm" style={{ color: '#ef4444' }} onClick={() => handleDelete(project.id)}>
+                    <Trash2 size={16} /> Delete
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+        )}
       </div>
 
       {isModalOpen && (

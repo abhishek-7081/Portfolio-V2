@@ -30,7 +30,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      {loading && <Loader fullScreen={true} />}
+      {loading && <Loader variant="login" />}
       <div className="glass-card login-card">
         <h2 className="section-title" style={{ marginBottom: '1.5rem', fontSize: '2rem' }}>Admin Login</h2>
         <p className="contact-subtitle" style={{ marginBottom: '2rem' }}>Secure access to portfolio dashboard.</p>

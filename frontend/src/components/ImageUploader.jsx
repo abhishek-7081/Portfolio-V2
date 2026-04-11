@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { api } from '../api/portfolioApi';
 import { useAuth } from '../context/AuthContext';
 import { Upload, X } from 'lucide-react';
+import Loader from './Loader';
 
 const ImageUploader = ({ onUploadSuccess, initialImage }) => {
   const [uploading, setUploading] = useState(false);
@@ -64,11 +65,7 @@ const ImageUploader = ({ onUploadSuccess, initialImage }) => {
           </label>
         )}
         
-        {uploading && (
-          <div className="uploading-overlay" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
-            <div style={{ color: 'white', fontSize: '0.8rem' }}>Uploading...</div>
-          </div>
-        )}
+        {uploading && <Loader variant="image-uploader" />}
       </div>
     </div>
   );

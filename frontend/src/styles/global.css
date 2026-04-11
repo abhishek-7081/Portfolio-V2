@@ -19,6 +19,11 @@
   --tag-bg: rgba(255, 255, 255, 0.05);
   --close-btn-bg: rgba(255, 255, 255, 1);
   --close-btn-color: #0f172a;
+  --skeleton-base: #17223f;
+  --skeleton-highlight: #243559;
+  --skeleton-panel: rgba(15, 23, 42, 0.72);
+  --skeleton-border: rgba(148, 163, 184, 0.14);
+  --skeleton-overlay: rgba(2, 6, 23, 0.72);
 }
 
 [data-theme="dark"] {
@@ -41,6 +46,11 @@
   --tag-bg: rgba(255, 255, 255, 0.03);
   --close-btn-bg: rgba(255, 255, 255, 1);
   --close-btn-color: #000000;
+  --skeleton-base: #151515;
+  --skeleton-highlight: #262626;
+  --skeleton-panel: rgba(10, 10, 10, 0.78);
+  --skeleton-border: rgba(255, 255, 255, 0.06);
+  --skeleton-overlay: rgba(0, 0, 0, 0.76);
 }
 
 [data-theme="light"] {
@@ -63,6 +73,11 @@
   --tag-bg: rgba(0, 0, 0, 0.05);
   --close-btn-bg: #0f172a;
   --close-btn-color: #ffffff;
+  --skeleton-base: #d7e1ee;
+  --skeleton-highlight: #eef4fb;
+  --skeleton-panel: rgba(255, 255, 255, 0.78);
+  --skeleton-border: rgba(15, 23, 42, 0.08);
+  --skeleton-overlay: rgba(226, 232, 240, 0.78);
 }
 
 * {

@@ -71,30 +71,34 @@ const AdminCertificates = () => {
     <div className="admin-certificates">
       <div className="action-bar" style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between' }}>
         <h2>Manage Certificates</h2>
-        <button className="btn btn-primary" onClick={() => { setIsModalOpen(true); setEditingCert(null); }}>
+        <button className="btn btn-primary" onClick={() => { setIsModalOpen(true); setEditingCert(null); }} disabled={isLoading}>
           <Plus size={18} /> Add Certificate
         </button>
       </div>
 
-      <div className="certificates-list admin-grid">
-        {isLoading && certificates.length === 0 ? <Loader fullScreen={true} /> : certificates.map(cert => (
-          <div key={cert.id} className="glass-card certificate-admin-card" style={{ padding: '1.5rem' }}>
-            {cert.image_url && (
-              <img src={cert.image_url} alt={cert.title} loading="lazy" style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '8px', marginBottom: '1rem' }} />
-            )}
-            <h3>{cert.title}</h3>
-            <p style={{ color: 'var(--primary)', fontWeight: '600' }}>{cert.organization}</p>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>{cert.date}</p>
-            <div className="card-actions" style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem' }}>
-              <button className="btn btn-outline btn-sm" onClick={() => handleEdit(cert)}>
-                <Edit2 size={16} /> Edit
-              </button>
-              <button className="btn btn-outline btn-sm" style={{ color: '#ef4444' }} onClick={() => handleDelete(cert.id)}>
-                <Trash2 size={16} /> Delete
-              </button>
-            </div>
+      <div className="certificates-list">
+        {isLoading ? <Loader variant="admin-certificates-grid" /> : (
+          <div className="admin-grid">
+            {certificates.map(cert => (
+              <div key={cert.id} className="glass-card certificate-admin-card" style={{ padding: '1.5rem' }}>
+                {cert.image_url && (
+                  <img src={cert.image_url} alt={cert.title} loading="lazy" style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '8px', marginBottom: '1rem' }} />
+                )}
+                <h3>{cert.title}</h3>
+                <p style={{ color: 'var(--primary)', fontWeight: '600' }}>{cert.organization}</p>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>{cert.date}</p>
+                <div className="card-actions" style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem' }}>
+                  <button className="btn btn-outline btn-sm" onClick={() => handleEdit(cert)}>
+                    <Edit2 size={16} /> Edit
+                  </button>
+                  <button className="btn btn-outline btn-sm" style={{ color: '#ef4444' }} onClick={() => handleDelete(cert.id)}>
+                    <Trash2 size={16} /> Delete
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+        )}
       </div>
 
       {isModalOpen && (

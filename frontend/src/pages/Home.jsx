@@ -37,7 +37,7 @@ const Home = () => {
   }, []);
 
   if (loading) {
-    return <Loader fullScreen={true} />;
+    return <Loader variant="home" />;
   }
 
   return (
