@@ -374,7 +374,7 @@ section {
 }
 
 .modal-info-side {
-  padding: 3rem;
+  padding: 1.3rem;
   display: flex;
   flex-direction: column;
   /* gap: 1.5rem; */
@@ -982,7 +982,7 @@ section {
   }
 
   .modal-info-side {
-    padding: 1.5rem;
+    padding: 1.3rem;
   }
 
   .modal-title {

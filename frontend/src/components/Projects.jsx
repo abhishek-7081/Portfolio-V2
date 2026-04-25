@@ -79,9 +79,9 @@ const Projects = ({ projects }) => {
               </div>
               
               <div className="modal-info-side">
-                <div className="modal-badge-custom">
+                {/* <div className="modal-badge-custom">
                   <span>Project</span>
-                </div>
+                </div> */}
                 <h2 className="modal-title">{selectedProject.title}</h2>
                 
                 <div className="modal-detail-item">
@@ -118,20 +118,20 @@ const Projects = ({ projects }) => {
       )}
 
       <style>{`
-        .modal-badge-custom {
-          display: inline-flex;
-          align-items: center;
-          padding: 0.5rem 1rem;
-          background: rgba(var(--primary-rgb), 0.1);
-          color: var(--primary);
-          border-radius: 50px;
-          font-size: 0.8rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          margin-bottom: 0.5rem;
-          border: 1px solid rgba(var(--primary-rgb), 0.2);
-        }
+        // .modal-badge-custom {
+        //   display: inline-flex;
+        //   align-items: center;
+        //   padding: 0.5rem 1rem;
+        //   background: rgba(var(--primary-rgb), 0.1);
+        //   color: var(--primary);
+        //   border-radius: 50px;
+        //   font-size: 0.8rem;
+        //   font-weight: 700;
+        //   text-transform: uppercase;
+        //   letter-spacing: 1px;
+        //   margin-bottom: 0.5rem;
+        //   border: 1px solid rgba(var(--primary-rgb), 0.2);
+        // }
 
         .modal-detail-item {
           display: flex;
